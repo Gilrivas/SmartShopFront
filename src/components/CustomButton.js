@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 
-const CustomButton = ({destination, parameter, goBack  }) => {
+const CustomButton = ({destination, parameter, goBack, css  }) => {
 const navigation = useNavigation();
 
   const handleNavigation = () => {
@@ -14,7 +14,7 @@ const navigation = useNavigation();
   };
 
   return (
-    <Pressable onPress={handleNavigation} style={styles.button}>
+    <Pressable onPress={handleNavigation} style={[styles.button, css]}>
       <Text style={styles.text}>{destination}</Text>
     </Pressable>
   );
