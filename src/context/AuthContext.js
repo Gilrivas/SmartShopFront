@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-//import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export const AuthContext = createContext();
 
 
@@ -7,6 +7,21 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [userToken, setUserToken] = useState(null);
   const [username, setUsername] = useState(null); // Nuevo estado para almacenar el nombre de usuario
+  
+  useEffect(() => {
+    const checkToken = async () => {
+      try {
+        const token = await AsyncStorage.getItem('USER_TOKEN');
+        setUserToken(token);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error retrieving token:', error);
+        setIsLoading(false);
+      }
+    };
+
+    checkToken();
+  }, []);
 
 
 
@@ -66,8 +81,9 @@ export const AuthProvider = ({ children }) => {
       });
 
       if (response.ok) {
-        const { user_name } = await response.json(); // Incluir el nombre de usuario en la respuesta
-       
+        const { token, user_name  } = await response.json(); // Incluir el nombre de usuario en la respuesta
+        await AsyncStorage.setItem('USER_TOKEN', token);
+        setUserToken(token);
         
         setUsername(data.user_name); // Almacenar el nombre de usuario en el estado
 

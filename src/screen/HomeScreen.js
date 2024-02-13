@@ -1,14 +1,15 @@
 import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react';
-import CustomButton from '../components/CustomButton';
-
+import CustomSubmitButton from '../components/CustomSubmitButton';
+import { AuthContext } from '../context/AuthContext';
 
 const HomeScreen = () => {
+  const { logout } = useContext(AuthContext);
   return (
     <SafeAreaView>
         <View style={styles.header}>
-        <CustomButton  goBack />
-        <Text style={styles.title}>hello</Text>
+        <CustomSubmitButton text='logout' onPress={() => {logout()}} />
+          <Text style={styles.title}>hello</Text>
             
         </View>
 
