@@ -9,7 +9,13 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffffff",
+      "extra": {
+        "eas": {
+          "projectId": "c3f2155e-d60f-4620-a95d-a79782fd0945"
+        }
+      },
+      "owner": "gilrivas"
     },
     "assetBundlePatterns": [
       "**/*"
